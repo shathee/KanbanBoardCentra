@@ -8,11 +8,14 @@
     <title>Kanban Board</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
         [class*="col-"] {
             padding-top: 0px;
             padding-bottom: 0px;
+        }
+        a.list-group-item {
+            margin-bottom: 5px;
         }
         .nopadding {
             padding:0px;
@@ -49,7 +52,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="list-group">
-
+                            <h4>Queued</h4>
                             {{#queued}}
                                 <a href="{{url}}" class="list-group-item list-group-item-danger">
                                     <span class="glyphicon glyphicon-question-sign"></span>
@@ -60,6 +63,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="list-group">
+                            <h4>Active</h4>
                             {{#active}}
                                 <a href="{{url}}" class="list-group-item {{#paused}}list-group-item-warning{{/paused}} {{^paused}}list-group-item-info{{/paused}}">
                                     <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
@@ -72,6 +76,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="list-group">
+                            <h4>Completed</h4>
                             {{#completed}}
                                 <a href="{{url}}" class="list-group-item list-group-item-success">
                                     <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
