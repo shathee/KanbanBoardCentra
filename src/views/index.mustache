@@ -65,13 +65,25 @@
                         <div class="list-group">
                             <h4>Active</h4>
                             {{#active}}
-                                <a href="{{url}}" class="list-group-item {{#paused}}list-group-item-warning{{/paused}} {{^paused}}list-group-item-info{{/paused}}">
+                                <a href="{{url}}" class="list-group-item 
+                                {{#paused}}list-group-item-warning{{/paused}} {{^paused}}list-group-item-info{{/paused}}">
+                                    
                                     <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
                                     {{#paused}}<em><small>{{/paused}}{{title}}{{#paused}}</small></em>{{/paused}}
                                     <span id="state" class="glyphicon"></span>
                                     <span style="float: right" class="glyphicon glyphicon-new-window"/>
                                 </a>
                             {{/active}}
+                            {{^active}}
+                                <a href="#" class="list-group-item list-group-item-info">
+                                    
+                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                    <em>No Active Tasks available</em>
+                                    <span id="state" class="glyphicon"></span>
+                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
+                                </a>
+                            {{/active}}
+
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -79,8 +91,17 @@
                             <h4>Completed</h4>
                             {{#completed}}
                                 <a href="{{url}}" class="list-group-item list-group-item-success">
+
                                     <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
                                     <s>{{title}}</s>
+                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
+                                </a>
+                            {{/completed}}
+                            {{^completed}}
+                                <a href="#" class="list-group-item list-group-item-success">
+
+                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                    <em>No Completed Task available</em>
                                     <span style="float: right" class="glyphicon glyphicon-new-window"/>
                                 </a>
                             {{/completed}}

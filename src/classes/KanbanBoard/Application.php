@@ -39,9 +39,9 @@ class Application {
 					'milestone' => $name,
 					'url' => $data['html_url'],
 					'progress' => $percent,
-					'queued' => $issues['queued'],
-					'active' => $issues['active'],
-					'completed' => $issues['completed']
+					'queued' => $issues['queued'] ?? '',
+					'active' => $issues['active'] ?? '',
+					'completed' => $issues['completed'] ?? ''
 				);
 			}
 		}
@@ -58,8 +58,8 @@ class Application {
 			$issues[$ii['state'] === 'closed' ? 'completed' : (($ii['assignee']) ? 'active' : 'queued')][] = array(
 				'id' => $ii['id'], 'number' => $ii['number'],
 				'title'            	=> $ii['title'],
-				'body'             	=> Markdown::defaultTransform($ii['body']),
-     'url' => $ii['html_url'],
+				'body'             	=> Markdown::defaultTransform($ii['body']), 
+										'url' => $ii['html_url'],
 				'assignee'         	=> (is_array($ii) && array_key_exists('assignee', $ii) && !empty($ii['assignee'])) ? $ii['assignee']['avatar_url'].'?s=16' : NULL,
 				'paused'			=> self::labels_match($ii, $this->paused_labels),
 				'progress'			=> self::_percent(
@@ -68,9 +68,13 @@ class Application {
 				'closed'			=> $ii['closed_at']
 			);
 		}
-		usort($issues['active'], function ($a, $b) {
-			return count($a['paused']) - count($b['paused']) === 0 ? strcmp($a['title'], $b['title']) : count($a['paused']) - count($b['paused']);
-		});
+
+		if(array_key_exists('active', $issues)){
+			usort($issues['active'], function ($a, $b) {
+				return count($a['paused']) - count($b['paused']) === 0 ? strcmp($a['title'], $b['title']) : count($a['paused']) - count($b['paused']);
+			});
+		}
+		
 		return $issues;
 	}
 
