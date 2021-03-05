@@ -14,8 +14,14 @@
             padding-top: 0px;
             padding-bottom: 0px;
         }
+        .container-fluid {
+            padding:20px; 
+        }
         a.list-group-item {
             margin-bottom: 5px;
+        }
+        .list-group a {
+            text-decoration: none;
         }
         .nopadding {
             padding:0px;
@@ -38,10 +44,12 @@
   </head>
   <body>
   <div class="container-fluid">
+    <h2>Kanban board for Github issues</h2>
     {{#milestones}}
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <p class="panel-title">
+                    Milestone:
                     <a href="{{url}}">
                         {{milestone}}
                         <span style="float: right" class="glyphicon glyphicon-new-window"/>
@@ -59,6 +67,12 @@
                                     {{title}}
                                     <span style="float: right" class="glyphicon glyphicon-new-window"/></a>
                             {{/queued}}
+                            {{^queued}}
+                                <a href="#" class="text-danger">
+                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
+                                    No task in queue
+                                </a>
+                            {{/queued}}
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -75,12 +89,9 @@
                                 </a>
                             {{/active}}
                             {{^active}}
-                                <a href="#" class="list-group-item list-group-item-info">
-                                    
-                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                <a href="#" class="text-danger">
+                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
                                     <em>No Active Tasks available</em>
-                                    <span id="state" class="glyphicon"></span>
-                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
                                 </a>
                             {{/active}}
 
@@ -98,11 +109,9 @@
                                 </a>
                             {{/completed}}
                             {{^completed}}
-                                <a href="#" class="list-group-item list-group-item-success">
-
-                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                <a href="#" class="text-warning">
+                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
                                     <em>No Completed Task available</em>
-                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
                                 </a>
                             {{/completed}}
                         </div>
