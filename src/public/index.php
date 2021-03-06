@@ -12,10 +12,11 @@ require '../classes/KanbanBoard/Authentication.php';
 $environment_file_path = dirname(__DIR__, 2).'/.env';
 
 Utilities::load_env_file($environment_file_path);
-
-
+$client_id = Utilities::env('GH_CLIENT_ID');
+$client_secret = Utilities::env('GH_CLIENT_SECRET');
 $repositories = explode('|', Utilities::env('GH_REPOSITORIES'));
-$authentication = new \KanbanBoard\Login();
+
+$authentication = new \KanbanBoard\Login($client_id,$client_secret);
 $token = $authentication->login();
 $github = new GithubClient($token, Utilities::env('GH_ACCOUNT'));
 
