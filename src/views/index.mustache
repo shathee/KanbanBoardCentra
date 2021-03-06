@@ -45,6 +45,9 @@
   <body>
   <div class="container-fluid">
     <h2>Kanban board for Github issues</h2>
+    {{#msg}}
+    <div class="alert alert-danger" role="alert">{{msg}}</div>
+    {{/msg}}
     {{#milestones}}
         <div class="panel panel-primary">
             <div class="panel-heading">

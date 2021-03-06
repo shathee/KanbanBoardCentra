@@ -4,6 +4,7 @@ namespace KanbanBoard;
 class Utilities
 {
 	private function __construct() {
+
 	}
 
 	/**
@@ -12,6 +13,8 @@ class Utilities
 	 * @return 
 	*/
 	
+	public  static $message = '';
+
 	public static function load_env_file($file_path) {
 		
 		if(!file_exists($file_path)) {
@@ -37,6 +40,7 @@ class Utilities
 	            }
 	        }
         }
+        return $_ENV;
 	}
 
 	/**
@@ -53,7 +57,8 @@ class Utilities
 				return $value;
 			return $default;
 		}
-		return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
+		return $value;
+		// return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
 	}
 
 	public static function hasValue($array, $key) {
