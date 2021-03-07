@@ -12,7 +12,7 @@ final class UtilityTest extends PHPUnit_Framework_TestCase
         Utilities::load_env_file(dirname(__DIR__).'/.env');
         
     }
-
+    
     public function testEnvFileExists(){
         $this->assertFileExists($this->env_path);
     }

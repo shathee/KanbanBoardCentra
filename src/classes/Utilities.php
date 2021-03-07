@@ -3,6 +3,8 @@ namespace KanbanBoard;
 
 class Utilities
 {
+	private static $message='';
+
 	private function __construct() {
 
 	}
@@ -67,5 +69,14 @@ class Utilities
 		echo '<pre>';
 		var_dump($data);
 		echo '</pre>';
+	}
+
+	public static function getMessage(){
+		return self::$message;
+	}
+
+	public static function setMessage($msg){
+		self::$message = $msg;
+		return self::$message;
 	}
 }

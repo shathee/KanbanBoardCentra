@@ -22,11 +22,13 @@ class Application {
 		$ms = array();
 		$milestones = [];
 		foreach ($this->repositories as $repository)
-		{
-			foreach ($this->github->milestones($repository) as $data)
-			{
-				$ms[$data['title']] = $data;
-				$ms[$data['title']]['repository'] = $repository;
+		{	
+			if($repository != '' && $repository != NULL){
+				foreach ($this->github->milestones($repository) as $data)
+				{
+					$ms[$data['title']] = $data;
+					$ms[$data['title']]['repository'] = $repository;
+				}
 			}
 		}
 		ksort($ms);

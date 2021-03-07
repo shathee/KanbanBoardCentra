@@ -9,7 +9,6 @@ final class AuthenticationTest extends PHPUnit_Framework_TestCase
 {
 	protected $loginObject;
 	public function setup(){
-		// $this->loginObject = new \KanbanBoard\Login();
 		$this->loginObject = $this->getMockBuilder(\KanbanBoard\Login::class)->getMock();
 		
 	}
