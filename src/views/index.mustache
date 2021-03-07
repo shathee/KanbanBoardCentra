@@ -130,6 +130,11 @@
             </div>
         </div>
     {{/milestones}}
+    {{^milestones}}
+        <div class="bg-warning">
+            <h4><span class="glyphicon glyphicon-alert"></span>&nbsp;No Milestones available</h4>
+        </div>
+    {{/milestones}}
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

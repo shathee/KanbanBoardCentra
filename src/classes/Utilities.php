@@ -13,7 +13,6 @@ class Utilities
 	 * @return 
 	*/
 	
-	public  static $message = '';
 
 	public static function load_env_file($file_path) {
 		
@@ -58,7 +57,6 @@ class Utilities
 			return $default;
 		}
 		return $value;
-		// return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
 	}
 
 	public static function hasValue($array, $key) {

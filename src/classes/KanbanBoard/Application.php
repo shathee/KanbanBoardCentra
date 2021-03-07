@@ -20,6 +20,7 @@ class Application {
 	public function board()
 	{
 		$ms = array();
+		$milestones = [];
 		foreach ($this->repositories as $repository)
 		{
 			foreach ($this->github->milestones($repository) as $data)
@@ -29,13 +30,16 @@ class Application {
 			}
 		}
 		ksort($ms);
+
 		foreach ($ms as $name => $data)
 		{
 			$issues = $this->issues($data['repository'], $data['number']);
 			$percent = self::_percent($data['closed_issues'], $data['open_issues']);
+
 			if($percent)
 			{
 				$milestones[] = array(
+					'repo' => $data['repository'],
 					'milestone' => $name,
 					'url' => $data['html_url'],
 					'progress' => $percent,

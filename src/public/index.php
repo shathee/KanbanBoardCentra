@@ -8,8 +8,8 @@ require '../classes/Utilities.php';
 require '../classes/KanbanBoard/Authentication.php';
 require '../../vendor/autoload.php';
 
-$msg = Utilities::$message;
-print_r($msg);
+$msg = '';
+
 // setting the .env path 
 $environment_file_path = dirname(__DIR__, 2).'/.env';
 
@@ -39,5 +39,5 @@ if(!empty($client_acc) && $client_acc != NULL){
 $m = new Mustache_Engine(array(
 	'loader' => new Mustache_Loader_FilesystemLoader('../views'), 'entity_flags' => ENT_QUOTES
 ));
-
+// print_r($data);
 echo $m->render('index', array('milestones' => $data, 'msg'=>$msg));
