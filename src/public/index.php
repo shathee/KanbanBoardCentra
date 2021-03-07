@@ -19,7 +19,7 @@ $client_acc = Utilities::env('GH_ACCOUNT');
 $client_id = Utilities::env('GH_CLIENT_ID');
 $client_secret = Utilities::env('GH_CLIENT_SECRET');
 $repositories = explode('|', Utilities::env('GH_REPOSITORIES'));
-
+$pause_labels = explode('|', Utilities::env('PAUSE_LABELS'));
 $authentication = new \KanbanBoard\Login($client_id,$client_secret);
 $token = $authentication->login();
 
@@ -29,7 +29,7 @@ if(!empty($client_acc) && $client_acc != NULL){
 		$msg = 'Environment variable GH_REPOSITORIES not found or has no value';
 	}else{
 		$github = new GithubClient($token, $client_acc);
-		$board = new \KanbanBoard\Application($github, $repositories, array('waiting-for-feedback'));
+		$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
 		$data = $board->board();
 	}
 }else{
