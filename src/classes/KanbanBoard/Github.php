@@ -6,13 +6,20 @@ class GithubClient
     private $milestone_api;
     private $account;
 
-    public function __construct($token, $account, $client)
+    public function __construct($token=NULL, $account, $client)
     {
         $this->account = $account;
         $this->client = $client;
-        $this->client->authenticate($token, \Github\Client::AUTH_HTTP_TOKEN);
+        $this->_authenticat_token($token);
         $this->milestone_api = $this->client->api('issues')->milestones();
     }
+
+    private function _authenticat_token($token){
+        if($token !== NULL)
+            $this->client->authenticate($token, \Github\Client::AUTH_HTTP_TOKEN);
+        return true;
+    }
+        
 
     public function milestones($repository)
     {

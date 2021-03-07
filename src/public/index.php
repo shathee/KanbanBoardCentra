@@ -19,15 +19,25 @@ $client_acc = Utilities::env('GH_ACCOUNT');
 $client_id = Utilities::env('GH_CLIENT_ID');
 $client_secret = Utilities::env('GH_CLIENT_SECRET');
 $repositories = explode('|', Utilities::env('GH_REPOSITORIES'));
-$pause_labels = explode('|', Utilities::env('PAUSE_LABELS'));
+$pause_labels = explode('|', Utilities::env('PAUSE_LABELS', 'waiting-for-feedback'));
+
+$restriction_status = Utilities::env('RESTRICTED', 'Yes');
 
 $data = [];
-$authentication = new \KanbanBoard\Login($client_id,$client_secret);
-$token = $authentication->login();
-$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
-$github = new GithubClient($token, $client_acc, $client);
-$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
-$data = $board->board();
+if(strtolower($restriction_status) === 'yes'){
+	$authentication = new \KanbanBoard\Login($client_id,$client_secret);
+	$token = $authentication->login();
+	$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
+	$github = new GithubClient($token, $client_acc, $client);
+	$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
+	$data = $board->board();
+}else{
+	$token = NULL;
+	$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
+	$github = new GithubClient($token, $client_acc, $client);
+	$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
+	$data = $board->board();
+}
 
 
 $msg = Utilities::getMessage();

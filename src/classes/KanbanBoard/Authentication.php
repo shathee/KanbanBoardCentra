@@ -6,7 +6,7 @@ class Login {
 
 	private $client_id = NULL;
 	private $client_secret = NULL;
-
+	
 	public function __construct($client_id, $client_secret)
 	{
 		$this->client_id = $client_id;
@@ -48,6 +48,8 @@ class Login {
 		$url .= '?client_id=' . $this->client_id;
 		$url .= '&scope=repo';
 		$url .= '&state=LKHYgbn776tgubkjhk';
+		$url .= '&state=LKHYgbn776tgubkjhk';
+		$url .= '&allow_signup=FALSE';
 		header($url);
 		exit();
 	}

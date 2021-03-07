@@ -18,7 +18,7 @@ class Application {
 	}
 
 	public function board()
-	{
+	{	
 		$ms = array();
 		$milestones = [];
 		foreach ($this->repositories as $repository)
