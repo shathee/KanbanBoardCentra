@@ -47,18 +47,16 @@ class Utilities
 	/**
 	 * gets the value of the environment parameter 
 	 * @param type $name 
-	 * @param type|null $default 
 	 * @return 
 	 */
 	
 	public static function env($name, $default = NULL) {
 		$value = getenv($name);
-		if($default !== NULL) {
-			if(!empty($value))
-				return $value;
-			return $default;
+		if ($value === '' || $value === NULL) {
+			if($default !== NULL && $default !== '' ){
+				$value = $default;
+			}
 		}
-		// return $value;
 		return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
 	}
 
