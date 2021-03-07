@@ -20,22 +20,15 @@ $client_id = Utilities::env('GH_CLIENT_ID');
 $client_secret = Utilities::env('GH_CLIENT_SECRET');
 $repositories = explode('|', Utilities::env('GH_REPOSITORIES'));
 $pause_labels = explode('|', Utilities::env('PAUSE_LABELS'));
-$authentication = new \KanbanBoard\Login($client_id,$client_secret);
-$token = $authentication->login();
 
 $data = [];
-if(!empty($client_acc) && $client_acc != NULL){
-	if(empty($repositories[0]) || $repositories[0] === NULL) {
-		Utilities::setMessage('Environment variable GH_REPOSITORIES not found or has no value');
-	}else{
-		$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
-		$github = new GithubClient($token, $client_acc, $client);
-		$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
-		$data = $board->board();
-	}
-}else{
-	Utilities::setMessage('Environment variable GH_ACCOUNT not found or has no value');
-}
+$authentication = new \KanbanBoard\Login($client_id,$client_secret);
+$token = $authentication->login();
+$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
+$github = new GithubClient($token, $client_acc, $client);
+$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
+$data = $board->board();
+
 
 $msg = Utilities::getMessage();
 $m = new Mustache_Engine(array(

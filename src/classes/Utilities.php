@@ -58,7 +58,8 @@ class Utilities
 				return $value;
 			return $default;
 		}
-		return $value;
+		// return $value;
+		return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
 	}
 
 	public static function hasValue($array, $key) {
