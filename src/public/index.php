@@ -28,7 +28,8 @@ if(!empty($client_acc) && $client_acc != NULL){
 	if(empty($repositories[0]) || $repositories[0] === NULL) {
 		$msg = 'Environment variable GH_REPOSITORIES not found or has no value';
 	}else{
-		$github = new GithubClient($token, $client_acc);
+		$client= new \Github\Client(new \Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
+		$github = new GithubClient($token, $client_acc, $client);
 		$board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
 		$data = $board->board();
 	}
@@ -39,5 +40,4 @@ if(!empty($client_acc) && $client_acc != NULL){
 $m = new Mustache_Engine(array(
 	'loader' => new Mustache_Loader_FilesystemLoader('../views'), 'entity_flags' => ENT_QUOTES
 ));
-// print_r($data);
 echo $m->render('index', array('milestones' => $data, 'msg'=>$msg));

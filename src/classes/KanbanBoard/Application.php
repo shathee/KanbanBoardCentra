@@ -39,7 +39,6 @@ class Application {
 			if($percent)
 			{
 				$milestones[] = array(
-					'repo' => $data['repository'],
 					'milestone' => $name,
 					'url' => $data['html_url'],
 					'progress' => $percent,
