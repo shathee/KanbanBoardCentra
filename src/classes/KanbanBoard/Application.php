@@ -36,7 +36,7 @@ class Application {
 		foreach ($ms as $name => $data)
 		{
 			$issues = $this->issues($data['repository'], $data['number']);
-			$percent = self::_percent($data['closed_issues'], $data['open_issues']);
+			$percent = $this->percent($data['closed_issues'], $data['open_issues']);
 
 			if($percent)
 			{
@@ -66,8 +66,9 @@ class Application {
 				'body'             	=> Markdown::defaultTransform($ii['body']), 
 										'url' => $ii['html_url'],
 				'assignee'         	=> (is_array($ii) && array_key_exists('assignee', $ii) && !empty($ii['assignee'])) ? $ii['assignee']['avatar_url'].'?s=16' : NULL,
-				'paused'			=> self::labels_match($ii, $this->paused_labels),
-				'progress'			=> self::_percent(
+				// 'paused'			=> self::labels_match($ii, $this->paused_labels),
+				'paused'			=> $this->labels_match($ii, $this->paused_labels),
+				'progress'			=> $this->percent(
 											substr_count(strtolower($ii['body']), '[x]'),
 											substr_count(strtolower($ii['body']), '[ ]')),
 				'closed'			=> $ii['closed_at']
@@ -83,7 +84,7 @@ class Application {
 		return $issues;
 	}
 
-	private static function _state($issue)
+	private function state($issue)
 	{
 		if ($issue['state'] === 'closed')
 			return 'completed';
@@ -93,7 +94,8 @@ class Application {
 			return 'queued';
 	}
 
-	private static function labels_match($issue, $needles)
+	// private static function labels_match($issue, $needles)
+	private function labels_match($issue, $needles)
 	{
 		if(Utilities::hasValue($issue, 'labels')) {
 			foreach ($issue['labels'] as $label) {
@@ -106,7 +108,8 @@ class Application {
 
 	}
 
-	private static function _percent($complete, $remaining)
+	// private static function _percent($complete, $remaining)
+	private function percent($complete, $remaining)
 	{
 		$total = $complete + $remaining;
 		if($total > 0)

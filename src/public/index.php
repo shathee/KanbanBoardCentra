@@ -35,6 +35,7 @@ $board = new \KanbanBoard\Application($github, $repositories, $pause_labels);
 $data = $board->board();
 
 $msg = Utilities::getMessage();
+
 $m = new Mustache_Engine(array(
 	'loader' => new Mustache_Loader_FilesystemLoader('../views'), 'entity_flags' => ENT_QUOTES
 ));
