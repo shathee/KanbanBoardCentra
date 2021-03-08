@@ -46,95 +46,98 @@
   <div class="container-fluid">
     <h2>Kanban board for Github issues</h2>
     {{#msg}}
-    <div class="alert alert-danger" role="alert">{{msg}}</div>
+        <div class="alert alert-danger" role="alert">{{msg}}</div>
     {{/msg}}
-    {{#milestones}}
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <p class="panel-title">
-                    Milestone:
-                    <a href="{{url}}">
-                        {{milestone}}
-                        <span style="float: right" class="glyphicon glyphicon-new-window"/>
-                    </a>
-                </p>
-            </div>
-            <div class="panel-body small">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="list-group">
-                            <h4>Queued</h4>
-                            {{#queued}}
-                                <a href="{{url}}" class="list-group-item list-group-item-danger">
-                                    <span class="glyphicon glyphicon-question-sign"></span>
-                                    {{title}}
-                                    <span style="float: right" class="glyphicon glyphicon-new-window"/></a>
-                            {{/queued}}
-                            {{^queued}}
-                                <a href="#" class="text-danger">
-                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
-                                    No task in queue
-                                </a>
-                            {{/queued}}
+    {{^msg}}
+        {{#milestones}}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <p class="panel-title">
+                        Milestone:
+                        <a href="{{url}}">
+                            {{milestone}}
+                            <span style="float: right" class="glyphicon glyphicon-new-window"/>
+                        </a>
+                    </p>
+                </div>
+                <div class="panel-body small">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="list-group">
+                                <h4>Queued</h4>
+                                {{#queued}}
+                                    <a href="{{url}}" class="list-group-item list-group-item-danger">
+                                        <span class="glyphicon glyphicon-question-sign"></span>
+                                        {{title}}
+                                        <span style="float: right" class="glyphicon glyphicon-new-window"/></a>
+                                {{/queued}}
+                                {{^queued}}
+                                    <a href="#" class="text-danger">
+                                        <span class="glyphicon glyphicon-alert"></span>&nbsp;
+                                        No task in queue
+                                    </a>
+                                {{/queued}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="list-group">
-                            <h4>Active</h4>
-                            {{#active}}
-                                <a href="{{url}}" class="list-group-item 
-                                {{#paused}}list-group-item-warning{{/paused}} {{^paused}}list-group-item-info{{/paused}}">
-                                    
-                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
-                                    {{#paused}}<em><small>{{/paused}}{{title}}{{#paused}}</small></em>{{/paused}}
-                                    <span id="state" class="glyphicon"></span>
-                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
-                                </a>
-                            {{/active}}
-                            {{^active}}
-                                <a href="#" class="text-danger">
-                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
-                                    <em>No Active Tasks available</em>
-                                </a>
-                            {{/active}}
+                        <div class="col-sm-4">
+                            <div class="list-group">
+                                <h4>Active</h4>
+                                {{#active}}
+                                    <a href="{{url}}" class="list-group-item 
+                                    {{#paused}}list-group-item-warning{{/paused}} {{^paused}}list-group-item-info{{/paused}}">
+                                        
+                                        <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                        {{#paused}}<em><small>{{/paused}}{{title}}{{#paused}}</small></em>{{/paused}}
+                                        <span id="state" class="glyphicon"></span>
+                                        <span style="float: right" class="glyphicon glyphicon-new-window"/>
+                                    </a>
+                                {{/active}}
+                                {{^active}}
+                                    <a href="#" class="text-danger">
+                                        <span class="glyphicon glyphicon-alert"></span>&nbsp;
+                                        <em>No Active Tasks available</em>
+                                    </a>
+                                {{/active}}
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="list-group">
-                            <h4>Completed</h4>
-                            {{#completed}}
-                                <a href="{{url}}" class="list-group-item list-group-item-success">
+                        <div class="col-sm-4">
+                            <div class="list-group">
+                                <h4>Completed</h4>
+                                {{#completed}}
+                                    <a href="{{url}}" class="list-group-item list-group-item-success">
 
-                                    <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
-                                    <s>{{title}}</s>
-                                    <span style="float: right" class="glyphicon glyphicon-new-window"/>
-                                </a>
-                            {{/completed}}
-                            {{^completed}}
-                                <a href="#" class="text-warning">
-                                    <span class="glyphicon glyphicon-alert"></span>&nbsp;
-                                    <em>No Completed Task available</em>
-                                </a>
-                            {{/completed}}
+                                        <img class="img-rounded" src="{{assignee}}" width="16" height="16" border="0"/>&nbsp;
+                                        <s>{{title}}</s>
+                                        <span style="float: right" class="glyphicon glyphicon-new-window"/>
+                                    </a>
+                                {{/completed}}
+                                {{^completed}}
+                                    <a href="#" class="text-warning">
+                                        <span class="glyphicon glyphicon-alert"></span>&nbsp;
+                                        <em>No Completed Task available</em>
+                                    </a>
+                                {{/completed}}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="panel-footer small">
+                    {{#progress}}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{percent}}%;">{{percent}}%</div>
+                        </div>
+                    {{/progress}}
+                </div>
             </div>
-            <div class="panel-footer small">
-                {{#progress}}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{percent}}%;">{{percent}}%</div>
-                    </div>
-                {{/progress}}
+        {{/milestones}}
+        {{^milestones}}
+            <div class="bg-warning">
+                <h4><span class="glyphicon glyphicon-alert"></span>&nbsp;No Milestones available</h4>
             </div>
-        </div>
-    {{/milestones}}
-    {{^milestones}}
-        <div class="bg-warning">
-            <h4><span class="glyphicon glyphicon-alert"></span>&nbsp;No Milestones available</h4>
-        </div>
-    {{/milestones}}
+        {{/milestones}}
+    
+    {{/msg}}
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

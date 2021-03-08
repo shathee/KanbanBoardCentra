@@ -26,7 +26,6 @@ class Utilities
         	}
         	$lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 	        foreach ($lines as $line) {
-
 	            if (strpos(trim($line), '#') === 0) {
 	                continue;
 	            }
@@ -57,7 +56,31 @@ class Utilities
 				$value = $default;
 			}
 		}
-		return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
+		return $value;
+		// return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
+	}
+
+	public static function validator($value, $name){
+		// print_r($name);
+		// print_r($value);
+		if(!array_key_exists($name, $_ENV)){
+			$msg = 'Environment variable ' . $name . ' not found';
+			self::setMessage($msg);
+			return False;
+		}
+		else if(is_array($value) && $value[0] === ''){
+			$msg = 'Environment variable ' . $name . ' has no value';
+			self::setMessage($msg);
+			return False;
+		}else if( empty($value) || $value === NULL ){
+			$msg = 'Environment variable ' . $name . ' has no value';
+			self::setMessage($msg);
+			return False;
+		}
+		else{
+			return True;
+		}
+		// return (empty($value) || $value === NULL) ? $msg = 'Environment variable ' . $name . ' not found or has no value' : $value;
 	}
 
 	public static function hasValue($array, $key) {
