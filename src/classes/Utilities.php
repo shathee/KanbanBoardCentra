@@ -16,7 +16,7 @@ class Utilities
 	*/
 	
 
-	public static function load_env_file($file_path) {
+	public static function loadEnvFile($file_path) {
 		
 		if(!file_exists($file_path)) {
             throw new \InvalidArgumentException(sprintf('%s does not exist', $file_path));
@@ -57,12 +57,9 @@ class Utilities
 			}
 		}
 		return $value;
-		// return (empty($value) && $default === NULL) ? die('Environment variable ' . $name . ' not found or has no value') : $value;
 	}
 
 	public static function validator($value, $name){
-		// print_r($name);
-		// print_r($value);
 		if(!array_key_exists($name, $_ENV)){
 			$msg = 'Environment variable ' . $name . ' not found';
 			self::setMessage($msg);
@@ -80,7 +77,6 @@ class Utilities
 		else{
 			return True;
 		}
-		// return (empty($value) || $value === NULL) ? $msg = 'Environment variable ' . $name . ' not found or has no value' : $value;
 	}
 
 	public static function hasValue($array, $key) {
