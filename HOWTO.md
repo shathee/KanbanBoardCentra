@@ -1,5 +1,6 @@
 
 
+
 # How To make this application work in local environment
 
 ## Requirements
@@ -14,20 +15,20 @@
  1. Run `composer install`  in the root directory 
  2. Create a  `.env` file in the root directory
  3. Add the following parameters (Mandatory requirements)
-	 * `GH_CLIENT_ID`(Your Github Client ID)
+	* `GH_CLIENT_ID`(Your Github Client ID)
 	* `GH_CLIENT_SECRET` (Your Github Client Secret)
 	* `GH_ACCOUNT`(Your Github Username)
 	* `GH_REPOSITORIES`(List of Repository names separated by `|` )
  4. Additionally you can also add following additional `.env`  parameters
-	 *`PAUSE_LABELS`  (Takes issue labels separated by  `|`  to indicate an issue as paused )
-	 *`RESTRICTED`  (default value is `Yes` enables the mandatory authentication for the visitors to access the Board, Can be set to `No` if no authentication is required )
+	* `PAUSE_LABELS`  (Takes issue labels separated by  `|`  to indicate an issue as paused )
+	* `RESTRICTED`  (default value is `Yes` enables the mandatory authentication for the visitors to access the Board, Can be set to `No` if no authentication is required )
  5. If you are using built in server with PHP then run `php -S localhost:8000 -t src/public/` in the root folder 
  	and go to [http://localhost:8000](http://localhost:8000) in your browser
  6. If you  are using Local Development Environment (Laragon/Xampp) you will need some additional steps
-	 * create virtual host 
+	* create virtual host 
 		 * For XAMPP you have to update `C:\xampp\apache\conf\httpd.conf`
 		 * Laragon automatically creates Virtual Host for you) 
-	 * create `.htaccess ` file in the root folder and add the following
+	* create `.htaccess ` file in the root folder and add the following (change the respective section with your one local domain/virtual host)
 	 ```RewriteEngine on 
 	 # Change example.test to be your primary domain.
 	 RewriteCond %{HTTP_HOST} ^(www.)?example.test$
