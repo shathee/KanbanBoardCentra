@@ -8,7 +8,7 @@ final class UtilityTest extends PHPUnit_Framework_TestCase
 	public function setUp()
     {
         $this->env_path = dirname(__DIR__).'/.env';
-        Utilities::load_env_file(dirname(__DIR__).'/.env');
+        Utilities::loadEnvFile(dirname(__DIR__).'/.env');
     }
 
     public function testLoadEnvFile(){
