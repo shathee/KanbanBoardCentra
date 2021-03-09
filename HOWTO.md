@@ -27,20 +27,20 @@
 	 * create virtual host 
 		 * For XAMPP you have to update `C:\xampp\apache\conf\httpd.conf`
 		 * Laragon automatically creates Virtual Host for you) 
- 7. create `.htaccess ` file in the root folder and add the following
+	 * create `.htaccess ` file in the root folder and add the following
 	 ```RewriteEngine on 
 	 # Change example.test to be your primary domain.
 	 RewriteCond %{HTTP_HOST} ^(www.)?example.test$
-	 # Change 'subfolder' to be the folder you will use for your primary domain.
 	 RewriteCond %{REQUEST_URI} !^/src/public
 	 # Don't change this line.
 	 RewriteCond %{REQUEST_FILENAME} !-f 
 	 RewriteCond %{REQUEST_FILENAME} !-d
-	 # Change 'subfolder' to be the folder you will use for your primary domain.
 	 RewriteRule ^(.*)$ /src/public/$1
 	 # Change example.test to be your primary domain again. 
-	 # Change 'subfolder' to be the folder you will use for your primary domain followed by / then the main file for your site, index.php etc.
+	 # primary domain followed by / then the main file for your site, index.php etc.
 	 RewriteCond %{HTTP_HOST} ^(www.)?example.test$
 	 RewriteRule ^(/)?$ src/public/index.php [L]  ```
- 8. Finally you have to update your github Developer app's `Homepage URL` abd `Authorization callback URL` with your local domain (`localhost:8000` or `example.test` or whatever virtual host name you use ) 
- 
+ 7. Finally you have to update your github Developer app's `Homepage URL` abd `Authorization callback URL` with your local domain (`localhost:8000` or `example.test` or whatever virtual host name you use ) 
+  
+## Running the Tests
+To run the test use `./vendor/bin/phpunit tests` command from root folder.  
