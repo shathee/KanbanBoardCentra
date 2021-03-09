@@ -20,7 +20,6 @@ class GithubClient
         return true;
     }
         
-
     public function milestones($repository)
     {   
         return $this->milestone_api->all($this->account, $repository);

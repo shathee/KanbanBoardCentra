@@ -7,7 +7,7 @@ require '../../vendor/autoload.php';
 // setting the .env path 
 $environment_file_path = dirname(__DIR__, 2).'/.env';
 
-$e = Utilities::loadEnvFile($environment_file_path);
+Utilities::loadEnvFile($environment_file_path);
 
 $client_acc = Utilities::env('GH_ACCOUNT');
 $client_id = Utilities::env('GH_CLIENT_ID');

@@ -14,8 +14,6 @@ class Utilities
 	 * @param type $file_path 
 	 * @return 
 	*/
-	
-
 	public static function loadEnvFile($file_path) {
 		
 		if(!file_exists($file_path)) {
@@ -40,7 +38,6 @@ class Utilities
 	            }
 	        }
         }
-        return $_ENV;
 	}
 
 	/**
